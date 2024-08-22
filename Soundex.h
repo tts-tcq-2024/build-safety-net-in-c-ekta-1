@@ -33,8 +33,10 @@ void updateSoundexArray(const char *name, int len, char *soundex) {
 
     for (int i = 1; i < len && sIndex < MAX_SOUNDEX_LENGTH; i++) {
         char code = getSoundexCode(name[i]);
-        appendSoundex(code, prevcode, soundex, &sIndex);
-        prevcode = code;
+        if (isalpha(name[i])) {
+            appendSoundex(code, prevcode, soundex, &sIndex);
+            prevcode = code;
+        }
     }
     soundex[sIndex] = '\0';
 }
